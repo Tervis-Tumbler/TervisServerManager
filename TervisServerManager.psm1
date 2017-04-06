@@ -59,3 +59,13 @@ NET-WCF-Services45
 NET-WCF-TCP-PortSharing45
 "@ -split "`r`n" 
 }
+
+function Compare-WindowsFeatureBetweenComputers {
+    param (
+        $ReferenceComputer,
+        $DifferenceComputer
+    )
+    $Reference = Get-WindowsFeature -ComputerName $ReferenceComputer
+    $Difference = Get-WindowsFeature -ComputerName $DifferenceComputer
+    Compare-Object -ReferenceObject $Reference -DifferenceObject $Difference -Property Name,InstallState
+}
