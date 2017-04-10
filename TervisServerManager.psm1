@@ -58,6 +58,11 @@ NET-Framework-45-Core
 NET-WCF-Services45
 NET-WCF-TCP-PortSharing45
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "WCSJavaApplication"
+    WindowsFeature = @"
+"@ -split "`r`n" 
 }
 
 function Compare-WindowsFeatureBetweenComputers {
