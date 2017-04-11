@@ -8,7 +8,7 @@
     $WindowsFeatureGroups = $WindowsFeatureGroupNames | Get-WindowsFeatureGroup
     $WindowsFeatures = $WindowsFeatureGroups.WindowsFeature | sort -Unique
     
-    if ($Credential-ne [System.Management.Automation.PSCredential]::Empty) {
+    if ($Credential -ne [System.Management.Automation.PSCredential]::Empty) {
         Install-WindowsFeature -Name $WindowsFeatures -ComputerName:$ComputerName -Credential:$Credential
     } else {
         Install-WindowsFeature -Name $WindowsFeatures -ComputerName:$ComputerName
