@@ -65,6 +65,37 @@ NET-WCF-TCP-PortSharing45
     Name = "WCSJavaApplication"
     WindowsFeature = @"
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "PrintServer"
+    WindowsFeature = @"
+Print-Internet
+Print-LPD-Service
+Print-Server
+RSAT-Print-Services
+SNMP-Service
+Telnet-Client
+Web-ASP
+Web-Basic-Auth
+Web-Default-Doc
+Web-Dir-Browsing
+Web-Filtering
+Web-Http-Errors
+Web-Http-Logging
+Web-Http-Redirect
+Web-Http-Tracing
+Web-ISAPI-Ext
+Web-ISAPI-Filter
+Web-Log-Libraries
+Web-Metabase
+Web-Mgmt-Service
+Web-Mgmt-Console
+Web-Net-Ext45
+Web-Request-Monitor
+Web-Scripting-Tools
+Web-Stat-Compression
+Web-Static-Content
+"@ -split "`r`n" 
 }
 
 function Compare-WindowsFeatureBetweenComputers {
