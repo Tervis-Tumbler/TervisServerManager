@@ -1,4 +1,24 @@
-﻿function Install-TervisWindowsFeature {
+﻿function Install-TervisDesiredStateConfiguration {
+    [CmdletBinding()]
+    param (
+        $ComputerName,
+        $ClusterApplicationName
+    )    
+    $DesiredStateConfigurationDefinition = $ClusterApplicationName | Get-DesiredStateConfigurationDefinition
+    if ($DesiredStateConfigurationDefinition) {
+        $TempPath = $env:TEMP
+        $DSCConfigurationFile = $DesiredStateConfigurationDefinition.Path
+        $DSCConfigurationName = $DesiredStateConfigurationDefinition.Name
+        . $DSCConfigurationFile
+        New-Item -Path $TempPath\$DSCConfigurationName -ItemType Directory
+        & $DesiredStateConfigurationDefinition.Name -Computername $ComputerName -OutputPath $TempPath\$DSCConfigurationName
+        Start-DscConfiguration -path $TempPath\$DSCConfigurationName -Wait -Verbose -Force
+        remove-item -path $TempPath\$DSCConfigurationName -recurse -force
+       
+    }
+}
+
+function Install-TervisWindowsFeature {
     [CmdletBinding()]
     param (
         $ComputerName,
@@ -24,6 +44,24 @@ function Get-WindowsFeatureGroup {
     process {
         $WindowsFeatureGroups | where Name -eq $Name
     }
+}
+
+function Get-DesiredStateConfigurationDefinition {
+    param (
+        [Parameter(Mandatory,ValueFromPipeline)]$Name
+    )
+    process {
+        $WindowsDesiredStateConfigurationDefinitions | where Name -eq $Name
+    }
+}
+
+$WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered] @{
+    Name = "SCDPM2016"
+    Path = "$PSScriptRoot\SCDPM2016.ps1"
+},
+[PSCustomObject][Ordered] @{
+    Name = "WindowsFileserver"
+    Path = "$PSScriptRoot\WindowsFileserver.ps1"
 }
 
 $WindowsFeatureGroups = [PSCustomObject][Ordered] @{
