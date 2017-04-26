@@ -3,6 +3,7 @@
 param (
     [Parameter(Mandatory=$true)] $Computername
 )
+    Import-DscResource –ModuleName 'PSDesiredStateConfiguration'
     Node $Computername
     {
         Import-DscResource –ModuleName 'PSDesiredStateConfiguration'
