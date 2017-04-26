@@ -6,7 +6,6 @@ param (
     Import-DscResource –ModuleName 'PSDesiredStateConfiguration'
     Node $Computername
     {
-        Import-DscResource –ModuleName 'PSDesiredStateConfiguration'
         WindowsFeature Deduplication
         {
             Ensure = “Present”
