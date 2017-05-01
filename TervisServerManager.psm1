@@ -7,14 +7,17 @@
     $DesiredStateConfigurationDefinition = $ClusterApplicationName | Get-DesiredStateConfigurationDefinition
     if ($DesiredStateConfigurationDefinition) {
         $TempPath = $env:TEMP
-        $DSCConfigurationFile = $DesiredStateConfigurationDefinition.Path
+        . $DesiredStateConfigurationDefinition.DSCConfigurationFile
+        $ConfigurationData = $desiredstateconfigurationdefinition.dscconfiguration
         $DSCConfigurationName = $DesiredStateConfigurationDefinition.Name
-        . $DSCConfigurationFile
-        New-Item -Path $TempPath\$DSCConfigurationName -ItemType Directory
-        & $DesiredStateConfigurationDefinition.Name -Computername $ComputerName -OutputPath $TempPath\$DSCConfigurationName
-        Start-DscConfiguration -path $TempPath\$DSCConfigurationName -Wait -Verbose -Force
-        remove-item -path $TempPath\$DSCConfigurationName -recurse -force
-       
+#        invoke-command -ComputerName $ComputerName -ScriptBlock {Install-PackageProvider -Name nuget -Force}
+#        foreach ($PSLibraryRequiredModule in $desiredstateconfigurationdefinition.PSLibraryModuleRequirements){
+#            Invoke-Command -ComputerName $ComputerName -ScriptBlock {param($ModuleName) Install-Module -Name $ModuleName -Force} -ArgumentList $PSLibraryRequiredModule
+#        }
+#        New-Item -Path "$TempPath\$DSCConfigurationName" -ItemType Directory
+        & $DSCConfigurationName -ConfigurationData $ConfigurationData -OutputPath "$TempPath\$DSCConfigurationName"
+        Start-DscConfiguration -ComputerName $ComputerName -path $TempPath\$DSCConfigurationName -Wait -Verbose -Force
+#        remove-item -path $TempPath\$DSCConfigurationName -recurse -force
     }
 }
 
@@ -48,20 +51,50 @@ function Get-WindowsFeatureGroup {
 
 function Get-DesiredStateConfigurationDefinition {
     param (
-        [Parameter(Mandatory,ValueFromPipeline)]$Name
+        [Parameter(Mandatory,ValueFromPipeline)]$ClusterApplicationName
     )
     process {
-        $WindowsDesiredStateConfigurationDefinitions | where Name -eq $Name
+        $WindowsDesiredStateConfigurationDefinitions | where Name -eq $ClusterApplicationName
     }
 }
 
-$WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered] @{
+$WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered]@{
     Name = "SCDPM2016"
-    Path = "$PSScriptRoot\SCDPM2016.ps1"
+    #DSCConfigurationfile = "$PSScriptRoot\SCDPM2016.ps1"
+    DSCConfigurationfile = "C:\Users\dmohlmaster\Documents\WindowsPowershell\Modules\TervisServerManager\SCDPM2016.ps1"
+    PSLibraryModuleRequirements = "xDismFeature","xSqlServer","xSCDPM"
+    DSCConfiguration = @{
+        AllNodes = @(
+                @{
+                Nodename = "inf-scdpm201601"
+                PSDscAllowPlainTextPassword = $true
+                PSDscAllowDomainUser =$true
+                SetupCredential = Get-PasswordstateCredential -PasswordID 4037
+                SACredential = Get-PasswordstateCredential -PasswordID 4128
+                SQLSourcePath = "\\fs1\disasterrecovery\Programs\Microsoft\SQL Server 2014 with sp2"
+                NETPath = "\\dfs-10\DisasterRecovery\Programs\Microsoft\Windows 2016 Sources\sources\sxs"
+                SQLInstallSharedDir = "C:\Program Files\Microsoft SQL Server"
+                SQLInstallSharedWOWDir = "C:\Program Files (x86)\Microsoft SQL Server"
+                SQLInstanceDir = "C:\Program Files\Microsoft SQL Server"
+                SQLInstallSQLDataDir = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Data"
+                SQLUserDBDir = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Data"
+                SQLUserDBLogDir = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Data"
+                SQLTempDBDir = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Data"
+                SQLTempDBLogDir = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Data"
+                SQLBackupDir = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Data"
+                AdminAccount = "Tervis\SCDPM,tervis\dmohlmaster,tervis\domain admins"
+                SQLRSSvcAccount = $InstallerCredential
+                SQLSvcAccount = $Installercredential
+                SQLAgtSvcAccount = $InstallerCredential
+                SQLInstanceName = "MSSQLSERVER"
+                SQLFeatures = "SQLENGINE,RS,SSMS,ADV_SSMS"    
+                }
+        )
+    }
 },
 [PSCustomObject][Ordered] @{
-    Name = "WindowsFileserver"
-    Path = "$PSScriptRoot\WindowsFileserver.ps1"
+    Name = "WindowsFileServer"
+    DSCConfigurationFile = "WindowsFileserver.ps1"
 }
 
 $WindowsFeatureGroups = [PSCustomObject][Ordered] @{

@@ -1,10 +1,15 @@
 ﻿Configuration SCDPM2016
 {
-param (
-    [Parameter(Mandatory=$true)] $Computername
-)
-    Import-DscResource –ModuleName 'PSDesiredStateConfiguration'
-    Node $Computername
+#    Param(
+#        [string[]]$ComputerName
+#
+#    )
+    Import-DscResource –Module PSDesiredStateConfiguration
+    Import-DscResource -Module xDismFeature
+    Import-DscResource -Module xSqlServer
+    Import-DscResource -Module xSCDPM
+
+    Node $AllNodes.NodeName
     {
         WindowsFeature Deduplication
         {
@@ -55,6 +60,41 @@ param (
             ValueName = "ttComStr201"
             ValueData = "4"
         }
-
+        Group SCDPMUserAddToAdministratorsGroup
+        {
+            GroupName = 'Administrators'
+            Ensure = "Present"
+            MembersToInclude = "tervis\domain admins","tervis\scdpm"
+        }
+        WindowsFeature "NET"
+        {
+            Ensure = "Present"
+            Name = "NET-Framework-Core"
+            Source = "\\dfs-10\DisasterRecovery\Programs\Microsoft\Windows 2016 Sources\sources\sxs"
+        }
+        xSqlServerSetup ($Node.NodeName + $Node.SQLInstanceName)
+        {
+            DependsOn = '[WindowsFeature]NET'
+            SourcePath = $Node.SQLSourcePath
+            SetupCredential = $Node.SetupCredential
+            InstanceName = $Node.SQLInstanceName
+            Features = $Node.SQLFeatures
+            SQLSysAdminAccounts = $Node.AdminAccount
+            SAPWD = $Node.SQPWD
+            InstallSharedDir = $Node.SQLInstallSharedDir
+            InstallSharedWOWDir = $Node.SQLInstallSharedWOWDir
+            InstanceDir = $Node.SQLInstanceDir
+            InstallSQLDataDir = $Node.SQLInstallSQLDataDir
+            SQLUserDBDir = $Node.SQLUserDBDir
+            SQLUserDBLogDir = $Node.SQLUserDBLogDir
+            SQLTempDBDir = $Node.SQLTempDBDir
+            SQLTempDBLogDir = $Node.SQLTempDBLogDir
+            SQLBackupDir = $Node.SQLBackupDir
+            SecurityMode = "SQL"
+            SQLSvcAccount = $Node.SQLSvcAccount
+            RSSvcAccount = $Node.SQLRSSvcAccount
+            AgtSvcAccount = $Node.SQLAgtSvcAccount
+        }
     }
 }
+
