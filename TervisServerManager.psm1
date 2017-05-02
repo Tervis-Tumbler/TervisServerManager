@@ -61,8 +61,7 @@ function Get-DesiredStateConfigurationDefinition {
 
 $WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered]@{
     Name = "SCDPM2016"
-    #DSCConfigurationfile = "$PSScriptRoot\SCDPM2016.ps1"
-    DSCConfigurationfile = "C:\Users\dmohlmaster\Documents\WindowsPowershell\Modules\TervisServerManager\SCDPM2016.ps1"
+    DSCConfigurationfile = "$PSScriptRoot\SCDPM2016.ps1"
     PSLibraryModuleRequirements = "xDismFeature","xSqlServer","xSCDPM"
     DSCConfiguration = @{
         AllNodes = @(
