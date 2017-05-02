@@ -10,14 +10,15 @@
         . $DesiredStateConfigurationDefinition.DSCConfigurationFile
         $ConfigurationData = $desiredstateconfigurationdefinition.dscconfiguration
         $DSCConfigurationName = $DesiredStateConfigurationDefinition.Name
-#        invoke-command -ComputerName $ComputerName -ScriptBlock {Install-PackageProvider -Name nuget -Force}
-#        foreach ($PSLibraryRequiredModule in $desiredstateconfigurationdefinition.PSLibraryModuleRequirements){
-#            Invoke-Command -ComputerName $ComputerName -ScriptBlock {param($ModuleName) Install-Module -Name $ModuleName -Force} -ArgumentList $PSLibraryRequiredModule
-#        }
-#        New-Item -Path "$TempPath\$DSCConfigurationName" -ItemType Directory
+        $AllNodeHashTable = $DesiredStateConfigurationDefinition.DSCConfiguration.AllNodes += @{"Nodename" = $ComputerName}
+        invoke-command -ComputerName $ComputerName -ScriptBlock {Install-PackageProvider -Name nuget -Force}
+        foreach ($PSLibraryRequiredModule in $desiredstateconfigurationdefinition.PSLibraryModuleRequirements){
+            Invoke-Command -ComputerName $ComputerName -ScriptBlock {param($ModuleName) Install-Module -Name $ModuleName -Force} -ArgumentList $PSLibraryRequiredModule
+        }
+        New-Item -Path "$TempPath\$DSCConfigurationName" -ItemType Directory
         & $DSCConfigurationName -ConfigurationData $ConfigurationData -OutputPath "$TempPath\$DSCConfigurationName"
         Start-DscConfiguration -ComputerName $ComputerName -path $TempPath\$DSCConfigurationName -Wait -Verbose -Force
-#        remove-item -path $TempPath\$DSCConfigurationName -recurse -force
+        remove-item -path $TempPath\$DSCConfigurationName -recurse -force
     }
 }
 
@@ -66,7 +67,7 @@ $WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered]@{
     DSCConfiguration = @{
         AllNodes = @(
                 @{
-                Nodename = "inf-scdpm201601"
+                Nodename = "*"
                 PSDscAllowPlainTextPassword = $true
                 PSDscAllowDomainUser =$true
                 SetupCredential = Get-PasswordstateCredential -PasswordID 4037
