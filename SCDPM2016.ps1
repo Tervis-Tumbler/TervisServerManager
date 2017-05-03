@@ -72,29 +72,37 @@
             Name = "NET-Framework-Core"
             Source = "\\dfs-10\DisasterRecovery\Programs\Microsoft\Windows 2016 Sources\sources\sxs"
         }
-        xSqlServerSetup ($Node.NodeName + $Node.SQLInstanceName)
+#        xSqlServerSetup ($Node.NodeName + $Node.SQLInstanceName)
+#        {
+#            DependsOn = '[WindowsFeature]NET'
+#            SourcePath = $Node.SQLSourcePath
+#            SetupCredential = $Node.SetupCredential
+#            InstanceName = $Node.SQLInstanceName
+#            Features = $Node.SQLFeatures
+#            SQLSysAdminAccounts = "builtin\administrators","tervis\domain admins","tervis\scdpm"
+#            SAPWD = $Node.SQPWD
+#            InstallSharedDir = $Node.SQLInstallSharedDir
+#            InstallSharedWOWDir = $Node.SQLInstallSharedWOWDir
+#            InstanceDir = $Node.SQLInstanceDir
+#            InstallSQLDataDir = $Node.SQLInstallSQLDataDir
+#            SQLUserDBDir = $Node.SQLUserDBDir
+#            SQLUserDBLogDir = $Node.SQLUserDBLogDir
+#            SQLTempDBDir = $Node.SQLTempDBDir
+#            SQLTempDBLogDir = $Node.SQLTempDBLogDir
+#            SQLBackupDir = $Node.SQLBackupDir
+#            SecurityMode = "SQL"
+#            SQLSvcAccount = $Node.SQLSvcAccount
+#            RSSvcAccount = $Node.SQLRSSvcAccount
+#            AgtSvcAccount = $Node.SQLAgtSvcAccount
+#        }
+        xSqlServerFirewall ($Node.NodeName)
         {
-            DependsOn = '[WindowsFeature]NET'
+            DependsOn = ("[xSqlServerSetup]" + $Node.NodeName + $Node.SQLInstanceName)
             SourcePath = $Node.SQLSourcePath
-            SetupCredential = $Node.SetupCredential
             InstanceName = $Node.SQLInstanceName
             Features = $Node.SQLFeatures
-            SQLSysAdminAccounts = $Node.AdminAccount
-            SAPWD = $Node.SQPWD
-            InstallSharedDir = $Node.SQLInstallSharedDir
-            InstallSharedWOWDir = $Node.SQLInstallSharedWOWDir
-            InstanceDir = $Node.SQLInstanceDir
-            InstallSQLDataDir = $Node.SQLInstallSQLDataDir
-            SQLUserDBDir = $Node.SQLUserDBDir
-            SQLUserDBLogDir = $Node.SQLUserDBLogDir
-            SQLTempDBDir = $Node.SQLTempDBDir
-            SQLTempDBLogDir = $Node.SQLTempDBLogDir
-            SQLBackupDir = $Node.SQLBackupDir
-            SecurityMode = "SQL"
-            SQLSvcAccount = $Node.SQLSvcAccount
-            RSSvcAccount = $Node.SQLRSSvcAccount
-            AgtSvcAccount = $Node.SQLAgtSvcAccount
         }
+        
     }
 }
 

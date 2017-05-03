@@ -11,7 +11,6 @@
         $ConfigurationData = $desiredstateconfigurationdefinition.dscconfiguration
         $DSCConfigurationName = $DesiredStateConfigurationDefinition.Name
         $AllNodeHashTable = $DesiredStateConfigurationDefinition.DSCConfiguration.AllNodes += @{"Nodename" = $ComputerName}
-        invoke-command -ComputerName $ComputerName -ScriptBlock {Install-PackageProvider -Name nuget -Force}
         foreach ($PSLibraryRequiredModule in $desiredstateconfigurationdefinition.PSLibraryModuleRequirements){
             Invoke-Command -ComputerName $ComputerName -ScriptBlock {param($ModuleName) Install-Module -Name $ModuleName -Force} -ArgumentList $PSLibraryRequiredModule
         }
@@ -62,7 +61,7 @@ function Get-DesiredStateConfigurationDefinition {
 $WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered]@{
     Name = "SCDPM2016"
     DSCConfigurationfile = "$PSScriptRoot\SCDPM2016.ps1"
-    PSLibraryModuleRequirements = "xDismFeature","xSqlServer","xSCDPM"
+    PSLibraryModuleRequirements = "xSqlServer"
     DSCConfiguration = @{
         AllNodes = @(
                 @{
