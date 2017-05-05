@@ -132,6 +132,8 @@ Web-ISAPI-Ext
 Web-Mgmt-Tools
 Web-Mgmt-Console
 Web-Scripting-Tools
+NET-Framework-Features
+NET-Framework-Core
 NET-Framework-45-Features
 NET-Framework-45-Core
 NET-WCF-Services45
