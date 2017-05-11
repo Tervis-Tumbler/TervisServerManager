@@ -95,13 +95,12 @@
 #            RSSvcAccount = $Node.SQLRSSvcAccount
 #            AgtSvcAccount = $Node.SQLAgtSvcAccount
 #        }
-        xSqlServerFirewall ($Node.NodeName)
-        {
-            DependsOn = ("[xSqlServerSetup]" + $Node.NodeName + $Node.SQLInstanceName)
-            SourcePath = $Node.SQLSourcePath
-            InstanceName = $Node.SQLInstanceName
-            Features = $Node.SQLFeatures
-        }
+#        xSqlServerFirewall ($Node.NodeName)
+#        {
+#            SourcePath = $Node.SQLSourcePath
+#            InstanceName = $Node.SQLInstanceName
+#            Features = $Node.SQLFeatures
+#        }
         
     }
 }
