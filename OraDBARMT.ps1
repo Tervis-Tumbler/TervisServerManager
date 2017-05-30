@@ -36,12 +36,6 @@
             Ensure = "Present"
             MembersToInclude = "tervis\domain admins"
         }
-        WindowsFeature "NET"
-        {
-            Ensure = "Present"
-            Name = "NET-Framework-Core"
-            Source = "\\dfs-10\DisasterRecovery\Programs\Microsoft\Windows 2016 Sources\sources\sxs"
-        }
     }
 }
 
