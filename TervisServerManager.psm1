@@ -254,6 +254,18 @@ RSAT-Feature-Tools
 RSAT-SNMP
 RDS-RD-Server
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "ODBARMT"
+    WindowsFeature = @"
+NET-Framework-Features
+NET-Framework-Core
+SNMP-Service
+RDS-RD-Server
+RSAT-Feature-Tools
+RSAT-SNMP
+RDS-RD-Server
+"@ -split "`r`n" 
 }
 
 function Compare-WindowsFeatureBetweenComputers {
