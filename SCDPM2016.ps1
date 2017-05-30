@@ -28,6 +28,18 @@
             Name = “SNMP-Service”
             IncludeAllSubFeature = $true
         }
+        WindowsFeature Hyper-V
+        {
+            Ensure = “Present”
+            Name = “Hyper-V”
+            IncludeAllSubFeature = $true
+        }
+        WindowsFeature Hyper-V-Powershell
+        {
+            Ensure = “Present”
+            Name = “Hyper-V-Powershell”
+            IncludeAllSubFeature = $true
+        }
         Registry MPIO1
         {
             Ensure = "Present"  # You can also set Ensure to "Absent"

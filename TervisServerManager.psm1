@@ -91,10 +91,23 @@ $WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered]@{
         )
     }
 },
+[PSCustomObject][Ordered]@{
+    Name = "OraDBARMTDkt"
+    DSCConfigurationfile = "$PSScriptRoot\OraDBARMTDkt.ps1"
+    DSCConfiguration = @{
+        AllNodes = @(
+                @{
+                Nodename = "*"
+                NETPath = "\\dfs-10\DisasterRecovery\Programs\Microsoft\Windows 2016 Sources\sources\sxs"
+                }
+        )
+    }
+},
 [PSCustomObject][Ordered] @{
     Name = "WindowsFileServer"
     DSCConfigurationFile = "WindowsFileserver.ps1"
 }
+
 
 $WindowsFeatureGroups = [PSCustomObject][Ordered] @{
     Name = "BartenderCommander"
@@ -223,6 +236,19 @@ Web-Scripting-Tools
 Web-Stat-Compression
 Web-Static-Content
 Windows-Internal-Database
+"@ -split "`r`n" 
+}
+[PSCustomObject][Ordered] @{
+    Name = "OracleDBARMTApp"
+    WindowsFeature = @"
+NET-Framework-Features
+NET-Framework-Core
+SNMP-Service
+RDS-RD-Server
+RSAT-Feature-Tools
+RSAT-SNMP
+RSAT-RDS-Licensing
+RDS-RD-Server
 "@ -split "`r`n" 
 }
 
