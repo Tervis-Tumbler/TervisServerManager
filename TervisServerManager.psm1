@@ -244,19 +244,7 @@ Windows-Internal-Database
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
-    Name = "OraDBARMT"
-    WindowsFeature = @"
-NET-Framework-Features
-NET-Framework-Core
-SNMP-Service
-RDS-RD-Server
-RSAT-Feature-Tools
-RSAT-SNMP
-RDS-RD-Server
-"@ -split "`r`n" 
-},
-[PSCustomObject][Ordered] @{
-    Name = "ODBARMT"
+    Name = "OracleDBA Remote Desktop"
     WindowsFeature = @"
 NET-Framework-Features
 NET-Framework-Core
