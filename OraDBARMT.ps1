@@ -1,4 +1,4 @@
-﻿Configuration OraDBARMTDkt
+﻿Configuration OraDBARMT
 {
 #    Param(
 #        [string[]]$ComputerName
