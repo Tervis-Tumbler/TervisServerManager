@@ -111,6 +111,13 @@ NET-Framework-Core
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
+    Name = "RemoteWebBrowserApp"
+    WindowsFeature = @"
+NET-Framework-Features
+NET-Framework-Core
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
     Name = "BartenderLicenseServer"
     WindowsFeature = @"
 NET-Framework-Features
