@@ -242,7 +242,7 @@ Web-Stat-Compression
 Web-Static-Content
 Windows-Internal-Database
 "@ -split "`r`n" 
-}
+},
 [PSCustomObject][Ordered] @{
     Name = "OraDBARMT"
     WindowsFeature = @"
