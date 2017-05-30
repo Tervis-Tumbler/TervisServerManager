@@ -92,8 +92,8 @@ $WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered]@{
     }
 },
 [PSCustomObject][Ordered]@{
-    Name = "OraDBARMTDkt"
-    DSCConfigurationfile = "$PSScriptRoot\OraDBARMTDkt.ps1"
+    Name = "OraDBARMT"
+    DSCConfigurationfile = "$PSScriptRoot\OraDBARMT.ps1"
     DSCConfiguration = @{
         AllNodes = @(
                 @{
@@ -118,13 +118,6 @@ NET-Framework-Core
 },
 [PSCustomObject][Ordered] @{
     Name = "RMSHQManagerRemoteApp"
-    WindowsFeature = @"
-NET-Framework-Features
-NET-Framework-Core
-"@ -split "`r`n" 
-},
-[PSCustomObject][Ordered] @{
-    Name = "RemoteWebBrowserApp"
     WindowsFeature = @"
 NET-Framework-Features
 NET-Framework-Core
@@ -239,7 +232,7 @@ Windows-Internal-Database
 "@ -split "`r`n" 
 }
 [PSCustomObject][Ordered] @{
-    Name = "OracleDBARMTApp"
+    Name = "OraDBARMT"
     WindowsFeature = @"
 NET-Framework-Features
 NET-Framework-Core
