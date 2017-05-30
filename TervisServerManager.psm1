@@ -252,7 +252,6 @@ SNMP-Service
 RDS-RD-Server
 RSAT-Feature-Tools
 RSAT-SNMP
-RSAT-RDS-Licensing
 RDS-RD-Server
 "@ -split "`r`n" 
 }
