@@ -126,15 +126,13 @@ NET-Framework-Core
 [PSCustomObject][Ordered] @{
     Name = "RemoteWebBrowserApp"
     WindowsFeature = @"
-NET-Framework-Features
-NET-Framework-Core
+RDS-RD-Server
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
     Name = "StoresRemoteDesktop"
     WindowsFeature = @"
-NET-Framework-Features
-NET-Framework-Core
+RDS-RD-Server
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
