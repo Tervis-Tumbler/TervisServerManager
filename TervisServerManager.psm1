@@ -127,12 +127,14 @@ NET-Framework-Core
     Name = "RemoteWebBrowserApp"
     WindowsFeature = @"
 RDS-RD-Server
+SNMP-Service
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
     Name = "StoresRemoteDesktop"
     WindowsFeature = @"
 RDS-RD-Server
+SNMP-Service
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
