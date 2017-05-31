@@ -30,6 +30,14 @@
             ValueName = "ttComStr201"
             ValueData = "4"
         }
+        Registry RemoteApps-Install
+        {
+            Ensure = "Present"  # You can also set Ensure to "Absent"
+            Key = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+            ValueType = "String"
+            ValueName = "RDApp"
+            ValueData = "rundll32.exe tsworkspace,WorkspaceSilentSetup c:\windows\system32\Remoteapps.wcx"
+        }
         Group AdministratorsGroup
         {
             GroupName = 'Administrators'
