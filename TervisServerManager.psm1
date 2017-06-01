@@ -180,6 +180,11 @@ NET-WCF-TCP-PortSharing45
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
+    Name = "ScheduledTasks"
+    WindowsFeature = @"
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
     Name = "PrintServer"
     WindowsFeature = @"
 Print-Internet
