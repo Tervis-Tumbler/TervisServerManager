@@ -182,7 +182,6 @@ NET-WCF-TCP-PortSharing45
 [PSCustomObject][Ordered] @{
     Name = "ScheduledTasks"
     WindowsFeature = @"
-SNMP-Service
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
