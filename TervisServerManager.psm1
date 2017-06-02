@@ -182,6 +182,9 @@ NET-WCF-TCP-PortSharing45
 [PSCustomObject][Ordered] @{
     Name = "ScheduledTasks"
     WindowsFeature = @"
+RSAT-Clustering-PowerShell
+RSAT-AD-PowerShell
+RSAT-RemoteAccess-PowerShell
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
