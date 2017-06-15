@@ -24,18 +24,21 @@
 function Install-TervisWindowsFeature {
     [CmdletBinding()]
     param (
-        $ComputerName,
+        [Parameter(Mandatory,ValueFromPipelineByPropertyName)]$ComputerName,
         $Credential = [System.Management.Automation.PSCredential]::Empty,
         $WindowsFeatureGroupNames
-    )    
+    )
+    begin {    
     $WindowsFeatureGroups = $WindowsFeatureGroupNames | Get-WindowsFeatureGroup
     $WindowsFeatures = $WindowsFeatureGroups.WindowsFeature | sort -Unique
-    
-    if ($WindowsFeatures) {
-        if ($Credential -ne [System.Management.Automation.PSCredential]::Empty) {
-            Install-WindowsFeature -Name $WindowsFeatures -ComputerName:$ComputerName -Credential:$Credential
-        } else {
-            Install-WindowsFeature -Name $WindowsFeatures -ComputerName:$ComputerName
+    }
+    process {
+        if ($WindowsFeatures) {
+            if ($Credential -ne [System.Management.Automation.PSCredential]::Empty) {
+                Install-WindowsFeature -Name $WindowsFeatures -ComputerName:$ComputerName -Credential:$Credential
+            } else {
+                Install-WindowsFeature -Name $WindowsFeatures -ComputerName:$ComputerName
+            }
         }
     }
 }
@@ -263,6 +266,12 @@ RDS-RD-Server
 RSAT-Feature-Tools
 RSAT-SNMP
 RDS-RD-Server
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "RemoteDesktopGateway"
+    WindowsFeature = @"
+RDS-Gateway
 "@ -split "`r`n" 
 }
 
