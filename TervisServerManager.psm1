@@ -69,27 +69,7 @@ $WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered]@{
         AllNodes = @(
                 @{
                 Nodename = "*"
-                PSDscAllowPlainTextPassword = $true
-                PSDscAllowDomainUser =$true
-                SetupCredential = Get-PasswordstateCredential -PasswordID 4037
-                SACredential = Get-PasswordstateCredential -PasswordID 4128
-                SQLSourcePath = "\\fs1\disasterrecovery\Programs\Microsoft\SQL Server 2014 with sp2"
                 NETPath = "\\dfs-10\DisasterRecovery\Programs\Microsoft\Windows 2016 Sources\sources\sxs"
-                SQLInstallSharedDir = "C:\Program Files\Microsoft SQL Server"
-                SQLInstallSharedWOWDir = "C:\Program Files (x86)\Microsoft SQL Server"
-                SQLInstanceDir = "C:\Program Files\Microsoft SQL Server"
-                SQLInstallSQLDataDir = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Data"
-                SQLUserDBDir = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Data"
-                SQLUserDBLogDir = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Data"
-                SQLTempDBDir = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Data"
-                SQLTempDBLogDir = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Data"
-                SQLBackupDir = "C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\Data"
-                AdminAccount = "Tervis\SCDPM,tervis\dmohlmaster,tervis\domain admins"
-                SQLRSSvcAccount = $InstallerCredential
-                SQLSvcAccount = $Installercredential
-                SQLAgtSvcAccount = $InstallerCredential
-                SQLInstanceName = "MSSQLSERVER"
-                SQLFeatures = "SQLENGINE,RS,SSMS,ADV_SSMS"    
                 }
         )
     }
@@ -97,6 +77,18 @@ $WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered]@{
 [PSCustomObject][Ordered]@{
     Name = "OraDBARMT"
     DSCConfigurationfile = "$PSScriptRoot\OraDBARMT.ps1"
+    DSCConfiguration = @{
+        AllNodes = @(
+                @{
+                Nodename = "*"
+                NETPath = "\\dfs-10\DisasterRecovery\Programs\Microsoft\Windows 2016 Sources\sources\sxs"
+                }
+        )
+    }
+},
+[PSCustomObject][Ordered]@{
+    Name = "SCDPM2016FS"
+    DSCConfigurationfile = "$PSScriptRoot\SCDPM2016FS.ps1"
     DSCConfiguration = @{
         AllNodes = @(
                 @{
