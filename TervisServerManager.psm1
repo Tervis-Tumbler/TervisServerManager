@@ -87,7 +87,7 @@ $WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered]@{
     }
 },
 [PSCustomObject][Ordered]@{
-    Name = "SCDPM2016FS"
+    Name = "SCDPM2016FileServer"
     DSCConfigurationfile = "$PSScriptRoot\SCDPM2016FS.ps1"
     DSCConfiguration = @{
         AllNodes = @(
