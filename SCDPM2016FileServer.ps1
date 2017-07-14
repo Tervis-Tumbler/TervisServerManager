@@ -1,13 +1,6 @@
-﻿Configuration SCDPM2016
+﻿Configuration SCDPM2016FileServer
 {
-#    Param(
-#        [string[]]$ComputerName
-#
-#    )
     Import-DscResource –Module PSDesiredStateConfiguration
-    Import-DscResource -Module xDismFeature
-    Import-DscResource -Module xSqlServer
-    Import-DscResource -Module xSCDPM
 
     Node $AllNodes.NodeName
     {
@@ -26,12 +19,6 @@
         {
             Ensure = “Present”
             Name = “SNMP-Service”
-            IncludeAllSubFeature = $true
-        }
-        WindowsFeature Hyper-V
-        {
-            Ensure = “Present”
-            Name = “Hyper-V”
             IncludeAllSubFeature = $true
         }
         WindowsFeature Hyper-V-Powershell

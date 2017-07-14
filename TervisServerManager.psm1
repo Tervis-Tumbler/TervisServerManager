@@ -8,12 +8,15 @@
     if ($DesiredStateConfigurationDefinition) {
         $TempPath = $env:TEMP
         . $DesiredStateConfigurationDefinition.DSCConfigurationFile
-        $ConfigurationData = $desiredstateconfigurationdefinition.dscconfiguration
+        $ConfigurationData = $desiredstateconfigurationdefinition.dscconfiguration.Clone()
         $DSCConfigurationName = $DesiredStateConfigurationDefinition.Name
-        $AllNodeHashTable = $DesiredStateConfigurationDefinition.DSCConfiguration.AllNodes += @{"Nodename" = $ComputerName}
+        $ConfigurationData.AllNodes += @{"Nodename" = $ComputerName}
         foreach ($PSLibraryRequiredModule in $desiredstateconfigurationdefinition.PSLibraryModuleRequirements){
-            Invoke-Command -ComputerName $ComputerName -ScriptBlock {param($ModuleName) Install-Module -Name $ModuleName -Force} -ArgumentList $PSLibraryRequiredModule
+            Invoke-Command -ComputerName $ComputerName -ScriptBlock {
+                Install-Module -Name $Using:PSLibraryRequiredModule -Force
+            }
         }
+
         New-Item -Path "$TempPath\$DSCConfigurationName" -ItemType Directory
         & $DSCConfigurationName -ConfigurationData $ConfigurationData -OutputPath "$TempPath\$DSCConfigurationName"
         Start-DscConfiguration -ComputerName $ComputerName -path $TempPath\$DSCConfigurationName -Wait -Verbose -Force
@@ -88,7 +91,7 @@ $WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered]@{
 },
 [PSCustomObject][Ordered]@{
     Name = "SCDPM2016FileServer"
-    DSCConfigurationfile = "$PSScriptRoot\SCDPM2016FS.ps1"
+    DSCConfigurationfile = "$PSScriptRoot\SCDPM2016FileServer.ps1"
     DSCConfiguration = @{
         AllNodes = @(
                 @{
