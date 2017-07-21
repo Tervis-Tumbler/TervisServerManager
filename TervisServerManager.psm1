@@ -178,6 +178,28 @@ NET-WCF-TCP-PortSharing45
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
+    Name = "HyperVCluster5"
+    WindowsFeature = @"
+Hyper-V
+Hyper-V-Tools
+Hyper-V-PowerShell
+Failover-Clustering
+RSAT-Clustering-Mgmt
+RSAT-Clustering-PowerShell
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "HyperVCluster6"
+    WindowsFeature = @"
+Hyper-V
+Hyper-V-Tools
+Hyper-V-PowerShell
+Failover-Clustering
+RSAT-Clustering-Mgmt
+RSAT-Clustering-PowerShell
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
     Name = "ScheduledTasks"
     WindowsFeature = @"
 RSAT-Clustering-PowerShell
