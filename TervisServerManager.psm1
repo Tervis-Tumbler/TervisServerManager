@@ -290,6 +290,12 @@ RDS-RD-Server
     WindowsFeature = @"
 RDS-Gateway
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "EBSRemoteApp"
+    WindowsFeature = @"
+Desktop-Experience
+"@ -split "`r`n" 
 }
 
 function Compare-WindowsFeatureBetweenComputers {
