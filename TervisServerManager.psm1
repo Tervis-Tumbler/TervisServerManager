@@ -2,9 +2,9 @@
     [CmdletBinding()]
     param (
         $ComputerName,
-        $ClusterApplicationName
+        $ApplicationName
     )    
-    $DesiredStateConfigurationDefinition = $ClusterApplicationName | Get-DesiredStateConfigurationDefinition
+    $DesiredStateConfigurationDefinition = $ApplicationName | Get-DesiredStateConfigurationDefinition
     if ($DesiredStateConfigurationDefinition) {
         $TempPath = $env:TEMP
         . $DesiredStateConfigurationDefinition.DSCConfigurationFile
@@ -57,10 +57,10 @@ function Get-WindowsFeatureGroup {
 
 function Get-DesiredStateConfigurationDefinition {
     param (
-        [Parameter(Mandatory,ValueFromPipeline)]$ClusterApplicationName
+        [Parameter(Mandatory,ValueFromPipeline)]$ApplicationName
     )
     process {
-        $WindowsDesiredStateConfigurationDefinitions | where Name -eq $ClusterApplicationName
+        $WindowsDesiredStateConfigurationDefinitions | where Name -eq $ApplicationName
     }
 }
 
