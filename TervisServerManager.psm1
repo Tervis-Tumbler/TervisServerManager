@@ -184,6 +184,7 @@ Hyper-V
 Hyper-V-Tools
 Hyper-V-PowerShell
 Failover-Clustering
+Multipath-IO
 RSAT-Clustering-Mgmt
 RSAT-Clustering-PowerShell
 "@ -split "`r`n" 
