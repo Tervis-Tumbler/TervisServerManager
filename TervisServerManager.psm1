@@ -207,6 +207,15 @@ RSAT-Clustering-PowerShell
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
+    Name = "VDICluster1"
+    WindowsFeature = @"
+Hyper-V
+Hyper-V-Tools
+Hyper-V-PowerShell
+Multipath-IO
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
     Name = "ScheduledTasks"
     WindowsFeature = @"
 RSAT-Clustering-PowerShell
