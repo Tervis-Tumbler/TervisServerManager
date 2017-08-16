@@ -216,6 +216,15 @@ Multipath-IO
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
+    Name = "StandaloneHyperVServer"
+    WindowsFeature = @"
+Hyper-V
+Hyper-V-Tools
+Hyper-V-PowerShell
+Multipath-IO
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
     Name = "ScheduledTasks"
     WindowsFeature = @"
 RSAT-Clustering-PowerShell
