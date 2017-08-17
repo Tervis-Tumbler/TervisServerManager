@@ -315,6 +315,12 @@ RDS-RD-Server
     WindowsFeature = @"
 RDS-Gateway
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "iSNS"
+    WindowsFeature = @"
+ISNS
+"@ -split "`r`n" 
 }
 
 function Compare-WindowsFeatureBetweenComputers {
