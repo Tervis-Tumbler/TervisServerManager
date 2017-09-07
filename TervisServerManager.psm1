@@ -321,6 +321,12 @@ RDS-Gateway
     WindowsFeature = @"
 ISNS
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "RemoteDesktopLicensing"
+    WindowsFeature = @"
+RDS-Licensing
+"@ -split "`r`n" 
 }
 
 function Compare-WindowsFeatureBetweenComputers {
