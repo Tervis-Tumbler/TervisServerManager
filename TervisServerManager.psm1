@@ -357,6 +357,36 @@ RSAT-RemoteAccess
 RSAT-RemoteAccess-Mgmt
 RSAT-RemoteAccess-PowerShell
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "DomainController"
+    WindowsFeature = @"
+AD-Domain-Services
+DNS
+FileAndStorage-Services
+File-Services
+FS-FileServer
+Storage-Services
+NET-Framework-45-Features
+NET-Framework-45-Core
+NET-WCF-Services45
+NET-WCF-TCP-PortSharing45
+GPMC
+RDC
+RSAT
+RSAT-Feature-Tools
+RSAT-SNMP
+RSAT-Role-Tools
+RSAT-AD-Tools
+RSAT-AD-PowerShell
+RSAT-ADDS
+RSAT-AD-AdminCenter
+RSAT-ADDS-Tools
+RSAT-DNS-Server
+SNMP-Service
+SNMP-WMI-Provider
+Telnet-Client
+"@ -split "`r`n" 
 }
 
 function Compare-WindowsFeatureBetweenComputers {
