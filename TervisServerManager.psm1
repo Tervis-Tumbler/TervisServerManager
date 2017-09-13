@@ -327,6 +327,36 @@ ISNS
     WindowsFeature = @"
 RDS-Licensing
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "ADFS"
+    WindowsFeature = @"
+ADFS-Federation
+NET-Framework-45-Features
+NET-Framework-45-Core
+NET-WCF-Services45
+NET-WCF-TCP-PortSharing45
+RSAT-AD-Tools
+RSAT-AD-PowerShell
+Telnet-Client
+Windows-Internal-Database
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "ADFSProxy"
+    WindowsFeature = @"
+RemoteAccess
+Web-Application-Proxy
+NET-Framework-45-Features
+NET-Framework-45-Core
+NET-WCF-Services45
+NET-WCF-TCP-PortSharing45
+GMPC
+CMAK
+RSAT-RemoteAccess
+RSAT-RemoteAccess-Mgmt
+RSAT-RemoteAccess-PowerShell
+"@ -split "`r`n" 
 }
 
 function Compare-WindowsFeatureBetweenComputers {
