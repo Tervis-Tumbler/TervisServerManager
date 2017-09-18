@@ -351,7 +351,7 @@ NET-Framework-45-Features
 NET-Framework-45-Core
 NET-WCF-Services45
 NET-WCF-TCP-PortSharing45
-GMPC
+GPMC
 CMAK
 RSAT-RemoteAccess
 RSAT-RemoteAccess-Mgmt
