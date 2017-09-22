@@ -398,3 +398,23 @@ function Compare-WindowsFeatureBetweenComputers {
     $Difference = Get-WindowsFeature -ComputerName $DifferenceComputer
     Compare-Object -ReferenceObject $Reference -DifferenceObject $Difference -Property Name,InstallState
 }
+
+function Set-StaticNetworkConfiguration {
+    param(
+        [parameter(Mandatory)]$IPAddress,
+        [parameter(Mandatory)]$Gateway,
+        [parameter(Mandatory)]$Prefix,
+        [parameter(Mandatory)]$DNSServers,
+        [parameter(Mandatory)]$NetAdapterName
+    )
+    
+    $IPAddress = $IPAddress;
+    $Gateway = $Gateway;
+    $Prefix = $Prefix;
+    $DNSServer = $DNSServers;
+    Import-Module NetAdapter ;
+    $NetAdapter = Get-NetAdapter -Name $NetAdapterName;
+    $NetAdapter | Set-NetIPInterface -DHCP Disabled;
+    $NetAdapter | New-NetIPAddress -AddressFamily IPv4 -IPAddress $IPAddress -PrefixLength $Prefix -Type Unicast -DefaultGateway $Gateway;
+    Set-DnsClientServerAddress -InterfaceAlias $NetAdapterName -ServerAddresses $DNSServers;
+}
