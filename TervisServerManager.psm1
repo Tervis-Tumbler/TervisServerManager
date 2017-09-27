@@ -386,6 +386,7 @@ RSAT-DNS-Server
 SNMP-Service
 SNMP-WMI-Provider
 Telnet-Client
+Windows-Server-Backup
 "@ -split "`r`n" 
 }
 
