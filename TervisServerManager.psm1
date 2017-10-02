@@ -388,6 +388,13 @@ SNMP-WMI-Provider
 Telnet-Client
 Windows-Server-Backup
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "FedExShipManager"
+    WindowsFeature = @"
+NET-Framework-Features
+NET-Framework-Core
+"@ -split "`r`n" 
 }
 
 function Compare-WindowsFeatureBetweenComputers {
