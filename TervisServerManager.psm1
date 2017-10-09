@@ -395,6 +395,12 @@ Windows-Server-Backup
 NET-Framework-Features
 NET-Framework-Core
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "ZeroTier Router"
+    WindowsFeature = @"
+Routing
+"@ -split "`r`n" 
 }
 
 function Compare-WindowsFeatureBetweenComputers {
