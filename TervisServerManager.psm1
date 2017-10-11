@@ -401,6 +401,25 @@ NET-Framework-Core
     WindowsFeature = @"
 Routing
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "SCCM 2016"
+    WindowsFeature = @"
+NET-Framework-45-Core
+NET-Framework-45-ASPNET
+Web-Static-Content
+Web-Default-Doc
+Web-Dir-Browsing
+Web-Http-Errors
+Web-Http-Logging
+Web-Request-Monitor
+Web-Filtering
+Web-Stat-Compression
+Web-Metabase
+Web-Asp-Net
+Web-Asp-Net45
+Web-Windows-Auth
+"@ -split "`r`n" 
 }
 
 function Compare-WindowsFeatureBetweenComputers {
