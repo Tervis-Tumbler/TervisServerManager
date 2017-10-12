@@ -403,7 +403,7 @@ Routing
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
-    Name = "SCCM 2016"
+    Name = "SCCM2016"
     WindowsFeature = @"
 NET-Framework-45-Core
 NET-Framework-45-ASPNET
