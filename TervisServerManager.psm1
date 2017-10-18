@@ -405,8 +405,11 @@ Routing
 [PSCustomObject][Ordered] @{
     Name = "SCCM2016"
     WindowsFeature = @"
+BITS
 NET-Framework-45-Core
 NET-Framework-45-ASPNET
+Telnet-Client
+UpdateServices-RSAT
 Web-Static-Content
 Web-Default-Doc
 Web-Dir-Browsing
@@ -419,6 +422,7 @@ Web-Metabase
 Web-Asp-Net
 Web-Asp-Net45
 Web-Windows-Auth
+Web-WMI
 "@ -split "`r`n" 
 }
 
