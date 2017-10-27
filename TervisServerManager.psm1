@@ -424,6 +424,19 @@ Web-Asp-Net45
 Web-Windows-Auth
 Web-WMI
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "SCDPMOraBackups"
+    WindowsFeature = @"
+NET-Framework-Features
+NET-Framework-Core
+NET-Framework-45-Core
+NET-Framework-45-ASPNET
+SNMP-Service
+FS-Data-Deduplication
+Multipath-IO
+Hyper-V-PowerShell
+"@ -split "`r`n" 
 }
 
 function Compare-WindowsFeatureBetweenComputers {
@@ -454,4 +467,17 @@ function Set-StaticNetworkConfiguration {
     $NetAdapter | Set-NetIPInterface -DHCP Disabled;
     $NetAdapter | New-NetIPAddress -AddressFamily IPv4 -IPAddress $IPAddress -PrefixLength $Prefix -Type Unicast -DefaultGateway $Gateway;
     Set-DnsClientServerAddress -InterfaceAlias $NetAdapterName -ServerAddresses $DNSServers;
+}
+
+function Invoke-InstallWindowsFeatureViaDISM {
+    param(
+        [parameter(Mandatory,ValueFromPipeline)]$Computername,
+        [parameter(Mandatory)]$FeatureName,
+        $NoRestart
+    )
+    if ($norestart){
+        $Command = "dism /online /enable-feature /featurename:$FeatureName -all /NoRestart"
+    }
+    $Command = "dism /online /enable-feature /featurename:$FeatureName /all /quiet"
+    Invoke-PsExec -ComputerName $Computername -Command $Command -IsPSCommand -IsLongPSCommand -CustomPsExecParameters "-s"
 }
