@@ -479,5 +479,5 @@ function Invoke-InstallWindowsFeatureViaDISM {
         $Command = "dism /online /enable-feature /featurename:$FeatureName -all /NoRestart"
     }
     $Command = "dism /online /enable-feature /featurename:$FeatureName /all /quiet"
-    Invoke-PsExec -ComputerName $Computername -Command $Command -IsPSCommand -IsLongPSCommand -CustomPsExecParameters "-s"
+    Invoke-PsExec -ComputerName $Computername -Command $Command -IsPSCommand -IsLongPSCommand #-CustomPsExecParameters "-s"
 }
