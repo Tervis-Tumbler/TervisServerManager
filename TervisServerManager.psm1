@@ -437,6 +437,19 @@ FS-Data-Deduplication
 Multipath-IO
 Hyper-V-PowerShell
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "SCDPM2016FileServer"
+    WindowsFeature = @"
+NET-Framework-Features
+NET-Framework-Core
+NET-Framework-45-Core
+NET-Framework-45-ASPNET
+SNMP-Service
+FS-Data-Deduplication
+Multipath-IO
+Hyper-V-PowerShell
+"@ -split "`r`n" 
 }
 
 function Compare-WindowsFeatureBetweenComputers {
