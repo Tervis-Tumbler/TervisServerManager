@@ -90,18 +90,6 @@ $WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered]@{
     }
 },
 [PSCustomObject][Ordered]@{
-    Name = "SCDPM2016FileServer"
-    DSCConfigurationfile = "$PSScriptRoot\SCDPM2016FileServer.ps1"
-    DSCConfiguration = @{
-        AllNodes = @(
-                @{
-                Nodename = "*"
-                NETPath = "\\dfs-10\DisasterRecovery\Programs\Microsoft\Windows 2016 Sources\sources\sxs"
-                }
-        )
-    }
-},
-[PSCustomObject][Ordered]@{
     Name = "SCDPM2016SQL"
     DSCConfigurationfile = "$PSScriptRoot\SCDPM2016SQL.ps1"
     DSCConfiguration = @{
@@ -484,13 +472,13 @@ function Set-StaticNetworkConfiguration {
 
 function Invoke-InstallWindowsFeatureViaDISM {
     param(
-        [parameter(Mandatory,ValueFromPipeline)]$Computername,
+        [parameter(Mandatory,ValueFromPipeline)]$Node,
         [parameter(Mandatory)]$FeatureName,
         $NoRestart
     )
     if ($norestart){
-        $Command = "dism /online /enable-feature /featurename:$FeatureName -all /NoRestart"
+        $Command = "dism /online /enable-feature /featurename:$FeatureName /all /NoRestart"
     }
-    $Command = "dism /online /enable-feature /featurename:$FeatureName /all /quiet"
-    Invoke-PsExec -ComputerName $Computername -Command $Command -IsPSCommand -IsLongPSCommand #-CustomPsExecParameters "-s"
+    $Command = "dism /online /enable-feature /featurename:$FeatureName /all"
+    Invoke-PsExec -ComputerName $Node.Computername -Command $Command -IsPSCommand -IsLongPSCommand #-CustomPsExecParameters "-s"
 }
