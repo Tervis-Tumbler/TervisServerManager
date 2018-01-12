@@ -472,13 +472,19 @@ function Set-StaticNetworkConfiguration {
 
 function Invoke-InstallWindowsFeatureViaDISM {
     param(
-        [parameter(Mandatory,ValueFromPipeline)]$Node,
+        [parameter(Mandatory,ValueFromPipelineByPropertyName)]$Computername,
         [parameter(Mandatory)]$FeatureName,
-        $NoRestart
+        [switch]$NoRestart
     )
-    if ($norestart){
+    if(-not (get-windowsoptionalfeature -FeatureName $FeatureName -Online)){
         $Command = "dism /online /enable-feature /featurename:$FeatureName /all /NoRestart"
+        Invoke-PsExec -ComputerName $Computername -Command $Command -IsPSCommand -IsLongPSCommand
+        if (-not ($NoRestart)){
+            if (Get-PendingRestart -ComputerName $Computername){
+                Restart-Computer -ComputerName $Computername -Force
+            }
+        }
+
     }
-    $Command = "dism /online /enable-feature /featurename:$FeatureName /all"
-    Invoke-PsExec -ComputerName $Node.Computername -Command $Command -IsPSCommand -IsLongPSCommand #-CustomPsExecParameters "-s"
+    
 }
