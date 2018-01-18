@@ -476,15 +476,16 @@ function Invoke-InstallWindowsFeatureViaDISM {
         [parameter(Mandatory)]$FeatureName,
         [switch]$NoRestart
     )
-    if(-not (get-windowsoptionalfeature -FeatureName $FeatureName -Online)){
-        $Command = "dism /online /enable-feature /featurename:$FeatureName /all /NoRestart"
-        Invoke-PsExec -ComputerName $Computername -Command $Command -IsPSCommand -IsLongPSCommand
-        if (-not ($NoRestart)){
-            if (Get-PendingRestart -ComputerName $Computername){
-                Restart-Computer -ComputerName $Computername -Force
+    Process {
+        if(-not (invoke-command -ComputerName $Computername -ScriptBlock {get-windowsoptionalfeature -FeatureName $using:featurename -online | where State -eq "Enabled"})){
+            $Command = "dism /online /enable-feature /featurename:$FeatureName /all /NoRestart"
+            $command
+            Invoke-PsExec -ComputerName $Computername -Command $Command -IsPSCommand -IsLongPSCommand
+            if (-not ($NoRestart)){
+                if (Get-PendingRestart -ComputerName $Computername){
+                    Restart-Computer -ComputerName $Computername -Force
+                }
             }
         }
-
-    }
-    
+    }    
 }
