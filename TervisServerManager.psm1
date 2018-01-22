@@ -124,6 +124,7 @@ $WindowsFeatureGroups = [PSCustomObject][Ordered] @{
     WindowsFeature = @"
 NET-Framework-Features
 NET-Framework-Core
+RSAT-AD-PowerShell
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
@@ -175,11 +176,13 @@ NET-Framework-45-Features
 NET-Framework-45-Core
 NET-WCF-Services45
 NET-WCF-TCP-PortSharing45
+RSAT-AD-PowerShell
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
     Name = "WCSJavaApplication"
     WindowsFeature = @"
+RSAT-AD-PowerShell
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
@@ -239,8 +242,6 @@ Print-Internet
 Print-LPD-Service
 Print-Server
 RSAT-Print-Services
-SNMP-Service
-Telnet-Client
 Web-ASP
 Web-Basic-Auth
 Web-Default-Doc
