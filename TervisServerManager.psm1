@@ -1,32 +1,6 @@
 ﻿$ModulePath = (Get-Module -ListAvailable TervisServerManager).ModuleBase
 . $ModulePath\Definition.ps1
 
-function Install-TervisDesiredStateConfiguration {
-    [CmdletBinding()]
-    param (
-        $ComputerName,
-        $ApplicationName
-    )    
-    $DesiredStateConfigurationDefinition = $ApplicationName | Get-DesiredStateConfigurationDefinition
-    if ($DesiredStateConfigurationDefinition) {
-        $TempPath = $env:TEMP
-        . $DesiredStateConfigurationDefinition.DSCConfigurationFile
-        $ConfigurationData = $desiredstateconfigurationdefinition.dscconfiguration.Clone()
-        $DSCConfigurationName = $DesiredStateConfigurationDefinition.Name
-        $ConfigurationData.AllNodes += @{"Nodename" = $ComputerName}
-        foreach ($PSLibraryRequiredModule in $desiredstateconfigurationdefinition.PSLibraryModuleRequirements){
-            Invoke-Command -ComputerName $ComputerName -ScriptBlock {
-                Install-Module -Name $Using:PSLibraryRequiredModule -Force
-            }
-        }
-
-        New-Item -Path "$TempPath\$DSCConfigurationName" -ItemType Directory
-        & $DSCConfigurationName -ConfigurationData $ConfigurationData -OutputPath "$TempPath\$DSCConfigurationName"
-        Start-DscConfiguration -ComputerName $ComputerName -path $TempPath\$DSCConfigurationName -Wait -Verbose -Force
-        remove-item -path $TempPath\$DSCConfigurationName -recurse -force
-    }
-}
-
 function Install-TervisWindowsFeature {
     [CmdletBinding()]
     param (

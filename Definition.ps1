@@ -1,47 +1,4 @@
-﻿$WindowsDesiredStateConfigurationDefinitions = [PSCustomObject][Ordered]@{
-    Name = "SCDPM2016"
-    DSCConfigurationfile = "$PSScriptRoot\SCDPM2016.ps1"
-    PSLibraryModuleRequirements = "xSqlServer"
-    DSCConfiguration = @{
-        AllNodes = @(
-                @{
-                Nodename = "*"
-                NETPath = "\\dfs-10\DisasterRecovery\Programs\Microsoft\Windows 2016 Sources\sources\sxs"
-                }
-        )
-    }
-},
-[PSCustomObject][Ordered]@{
-    Name = "OraDBARMT"
-    DSCConfigurationfile = "$PSScriptRoot\OraDBARMT.ps1"
-    DSCConfiguration = @{
-        AllNodes = @(
-                @{
-                Nodename = "*"
-                NETPath = "\\dfs-10\DisasterRecovery\Programs\Microsoft\Windows 2016 Sources\sources\sxs"
-                }
-        )
-    }
-},
-[PSCustomObject][Ordered]@{
-    Name = "SCDPM2016SQL"
-    DSCConfigurationfile = "$PSScriptRoot\SCDPM2016SQL.ps1"
-    DSCConfiguration = @{
-        AllNodes = @(
-                @{
-                Nodename = "*"
-                NETPath = "\\dfs-10\DisasterRecovery\Programs\Microsoft\Windows 2016 Sources\sources\sxs"
-                }
-        )
-    }
-},
-[PSCustomObject][Ordered] @{
-    Name = "WindowsFileServer"
-    DSCConfigurationFile = "WindowsFileserver.ps1"
-}
-
-
-$WindowsFeatureGroups = [PSCustomObject][Ordered] @{
+﻿$WindowsFeatureGroups = [PSCustomObject][Ordered] @{
     Name = "BartenderCommander"
     WindowsFeature = @"
 NET-Framework-Features
@@ -346,6 +303,20 @@ Web-Asp-Net
 Web-Asp-Net45
 Web-Windows-Auth
 Web-WMI
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "SCDPM2016"
+    WindowsFeature = @"
+NET-Framework-Features
+NET-Framework-Core
+NET-Framework-45-Core
+NET-Framework-45-ASPNET
+SNMP-Service
+SNMP-WMI-Provider
+FS-Data-Deduplication
+Multipath-IO
+Hyper-V-PowerShell
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
