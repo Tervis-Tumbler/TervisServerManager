@@ -90,3 +90,23 @@ function Invoke-InstallWindowsFeatureViaDISM {
         }
     }    
 }
+
+function Get-MemoryUsage {
+    param (
+        [Parameter(Mandatory,ValueFromPipelineByPropertyName)]$ComputerName
+    )
+
+    process {        
+        $MemoryStats = Get-CimInstance -ComputerName $Computername -ClassName Win32_OperatingSystem -Property FreePhysicalMemory,TotalVisibleMemorySize
+        $PercentUsed = 100 - [System.Math]::Round(($MemoryStats.FreePhysicalMemory/$MemoryStats.TotalVisibleMemorySize)*100,2)
+        $TotalMemoryInGB = [System.Math]::Round($MemoryStats.TotalVisibleMemorySize/1mb,2)
+        $UsedMemoryInGB = $TotalMemoryInGB - [System.Math]::Round($MemoryStats.FreePhysicalMemory/1mb,2)
+    
+        [PSCustomObject][Ordered]@{
+            ComputerName = $ComputerName
+            PercentUsed = $PercentUsed
+            UsedMemoryInGB = $UsedMemoryInGB
+            MemoryTotalInGB = $TotalMemoryInGB
+        }
+    }
+}
