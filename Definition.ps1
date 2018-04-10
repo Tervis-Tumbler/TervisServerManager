@@ -356,4 +356,15 @@ NET-Framework-Core
 NET-Framework-45-Core
 NET-Framework-45-ASPNET
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "SMTPRelay"
+    WindowsFeature = @"
+SNMP-Service
+NET-Framework-Features
+NET-Framework-Core
+NET-Framework-45-Core
+NET-Framework-45-ASPNET
+SMTP-Server
+"@ -split "`r`n" 
 }
