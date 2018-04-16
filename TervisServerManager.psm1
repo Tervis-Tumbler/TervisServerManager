@@ -15,9 +15,9 @@ function Install-TervisWindowsFeature {
     process {
         if ($WindowsFeatures) {
             if ($Credential -ne [System.Management.Automation.PSCredential]::Empty) {
-                Install-WindowsFeature -Name $WindowsFeatures -ComputerName:$ComputerName -Credential:$Credential
+                Install-WindowsFeature -Name $WindowsFeatures -ComputerName:$ComputerName -Credential:$Credential -Restart
             } else {
-                Install-WindowsFeature -Name $WindowsFeatures -ComputerName:$ComputerName
+                Install-WindowsFeature -Name $WindowsFeatures -ComputerName:$ComputerName -Restart
             }
         }
     }
