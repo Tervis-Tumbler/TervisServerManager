@@ -371,32 +371,32 @@ SMTP-Server
 [PSCustomObject][Ordered] @{
     Name = "ITToolbox"
     WindowsFeature = @"
-    RSAT
-    RSAT-Feature-Tools
-    RSAT-Clustering
-    RSAT-Clustering-Mgmt
-    RSAT-Clustering-PowerShell
-    RSAT-SNMP
-    RSAT-Role-Tools
-    RSAT-AD-Tools
-    RSAT-AD-PowerShell
-    RSAT-ADDS
-    RSAT-AD-AdminCenter
-    RSAT-ADDS-Tools
-    RSAT-ADLDS
-    RSAT-Hyper-V-Tools
-    RSAT-RDS-Tools
-    RSAT-RDS-Gateway
-    RSAT-RDS-Licensing-Diagnosis-UI
-    RSAT-ADCS
-    RSAT-ADCS-Mgmt
-    RSAT-Online-Responder
-    RSAT-DHCP
-    RSAT-DNS-Server
-    RSAT-File-Services
-    RSAT-DFS-Mgmt-Con
-    RSAT-FSRM-Mgmt
-    RSAT-CoreFile-Mgmt
-    RSAT-Print-Services    
+RSAT
+RSAT-Feature-Tools
+RSAT-Clustering
+RSAT-Clustering-Mgmt
+RSAT-Clustering-PowerShell
+RSAT-SNMP
+RSAT-Role-Tools
+RSAT-AD-Tools
+RSAT-AD-PowerShell
+RSAT-ADDS
+RSAT-AD-AdminCenter
+RSAT-ADDS-Tools
+RSAT-ADLDS
+RSAT-Hyper-V-Tools
+RSAT-RDS-Tools
+RSAT-RDS-Gateway
+RSAT-RDS-Licensing-Diagnosis-UI
+RSAT-ADCS
+RSAT-ADCS-Mgmt
+RSAT-Online-Responder
+RSAT-DHCP
+RSAT-DNS-Server
+RSAT-File-Services
+RSAT-DFS-Mgmt-Con
+RSAT-FSRM-Mgmt
+RSAT-CoreFile-Mgmt
+RSAT-Print-Services    
 "@ -split "`r`n" 
 }
