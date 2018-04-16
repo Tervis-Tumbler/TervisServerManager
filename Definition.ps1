@@ -396,7 +396,6 @@ RSAT-DNS-Server
 RSAT-File-Services
 RSAT-DFS-Mgmt-Con
 RSAT-FSRM-Mgmt
-RSAT-CoreFile-Mgmt
-RSAT-Print-Services    
+RSAT-Print-Services
 "@ -split "`r`n" 
 }
