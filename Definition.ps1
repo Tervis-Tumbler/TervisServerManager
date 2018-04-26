@@ -397,5 +397,6 @@ RSAT-File-Services
 RSAT-DFS-Mgmt-Con
 RSAT-FSRM-Mgmt
 RSAT-Print-Services
+Failover-Clustering
 "@ -split "`r`n" 
 }
