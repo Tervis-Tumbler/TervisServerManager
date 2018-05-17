@@ -399,4 +399,14 @@ RSAT-FSRM-Mgmt
 RSAT-Print-Services
 Failover-Clustering
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "AzureADConnector"
+    WindowsFeature = @"
+SNMP-Service
+NET-Framework-Features
+NET-Framework-Core
+NET-Framework-45-Core
+NET-Framework-45-ASPNET
+"@ -split "`r`n" 
 }
