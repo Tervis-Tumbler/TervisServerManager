@@ -409,4 +409,18 @@ NET-Framework-Core
 NET-Framework-45-Core
 NET-Framework-45-ASPNET
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "CertificateAuthority"
+    WindowsFeature = @"
+ADCS-Cert-Authority
+ADCS-Enroll-Web-Pol
+ADCS-Enroll-Web-Svc
+ADCS-Web-Enrollment
+ADCS-Device-Enrollment
+ADCS-Online-Cert
+RSAT-ADCS
+RSAT-ADCS-Mgmt
+"@ -split "`r`n" 
 }
+
