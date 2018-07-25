@@ -422,5 +422,35 @@ ADCS-Online-Cert
 RSAT-ADCS
 RSAT-ADCS-Mgmt
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "Passwordstate"
+    WindowsFeature = @"
+SNMP-Service
+NET-Framework-Features
+NET-Framework-Core
+NET-Framework-45-Core
+NET-Framework-45-ASPNET
+Web-ASP
+Web-Basic-Auth
+Web-Default-Doc
+Web-Dir-Browsing
+Web-Filtering
+Web-Http-Errors
+Web-Http-Logging
+Web-Http-Redirect
+Web-Http-Tracing
+Web-ISAPI-Ext
+Web-ISAPI-Filter
+Web-Log-Libraries
+Web-Metabase
+Web-Mgmt-Service
+Web-Mgmt-Console
+Web-Net-Ext45
+Web-Request-Monitor
+Web-Scripting-Tools
+Web-Stat-Compression
+Web-Static-Content
+"@ -split "`r`n" 
 }
 
