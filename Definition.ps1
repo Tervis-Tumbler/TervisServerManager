@@ -452,5 +452,22 @@ Web-Scripting-Tools
 Web-Stat-Compression
 Web-Static-Content
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "NestedHyperVCluster"
+    WindowsFeature = @"
+SNMP-Service
+NET-Framework-Features
+NET-Framework-Core
+NET-Framework-45-Core
+NET-Framework-45-ASPNET
+Hyper-V
+Hyper-V-Tools
+Hyper-V-PowerShell
+Failover-Clustering
+Multipath-IO
+RSAT-Clustering-Mgmt
+RSAT-Clustering-PowerShell
+"@ -split "`r`n" 
 }
 
