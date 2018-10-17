@@ -469,5 +469,33 @@ Multipath-IO
 RSAT-Clustering-Mgmt
 RSAT-Clustering-PowerShell
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "MFANPS"
+    WindowsFeature = @"
+SNMP-Service
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "MFANPSRDGateway"
+    WindowsFeature = @"
+SNMP-Service
+RDS-Gateway
+Remote-Desktop-Services
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "MFANPSRDBroker"
+    WindowsFeature = @"
+SNMP-Service
+Remote-Desktop-Services
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "AzureMFANPS"
+    WindowsFeature = @"
+SNMP-Service
+NPAS
+RSAT-NPAS
+"@ -split "`r`n" 
 }
-
