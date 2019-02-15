@@ -77,6 +77,15 @@ RSAT-Clustering-PowerShell
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
+    Name = "HyperVCluster5Evergreen"
+    WindowsFeature = @"
+Hyper-V
+Hyper-V-PowerShell
+Failover-Clustering
+Multipath-IO
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
     Name = "HyperVCluster6"
     WindowsFeature = @"
 Hyper-V
@@ -86,6 +95,15 @@ Failover-Clustering
 Multipath-IO
 RSAT-Clustering-Mgmt
 RSAT-Clustering-PowerShell
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "HyperVCluster6Evergreen"
+    WindowsFeature = @"
+Hyper-V
+Hyper-V-PowerShell
+Failover-Clustering
+Multipath-IO
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
@@ -326,7 +344,6 @@ NET-Framework-Features
 NET-Framework-Core
 NET-Framework-45-Core
 NET-Framework-45-ASPNET
-SNMP-Service
 FS-Data-Deduplication
 Multipath-IO
 Hyper-V-PowerShell
@@ -497,5 +514,36 @@ Remote-Desktop-Services
 SNMP-Service
 NPAS
 RSAT-NPAS
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "DCPasswordComplexityTest"
+    WindowsFeature = @"
+AD-Domain-Services
+DNS
+FileAndStorage-Services
+File-Services
+FS-FileServer
+Storage-Services
+NET-Framework-45-Features
+NET-Framework-45-Core
+NET-WCF-Services45
+NET-WCF-TCP-PortSharing45
+GPMC
+RDC
+RSAT
+RSAT-Feature-Tools
+RSAT-SNMP
+RSAT-Role-Tools
+RSAT-AD-Tools
+RSAT-AD-PowerShell
+RSAT-ADDS
+RSAT-AD-AdminCenter
+RSAT-ADDS-Tools
+RSAT-DNS-Server
+SNMP-Service
+SNMP-WMI-Provider
+Telnet-Client
+Windows-Server-Backup
 "@ -split "`r`n" 
 }
