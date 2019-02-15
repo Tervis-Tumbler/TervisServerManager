@@ -110,3 +110,20 @@ function Get-MemoryUsage {
         }
     }
 }
+
+function Set-HighPerformancePowerPolicyOnRemoteComputer {
+    param(
+        [parameter(mandatory,ValueFromPipelineByPropertyName)]$Computername
+    )
+    $PowerPlanGuid = Get-WmiObject -Namespace root\cimv2\power -Class Win32_PowerPlan -ComputerName $Computername | Where-Object ElementName -match "High Performance" | Get-GuidFromString -IncludeBraces:$false
+    Invoke-Command -ComputerName $Computername -ScriptBlock {
+        powercfg -setactive $Using:PowerPlanGuid
+    }
+}
+
+function Get-PerformancePowerPolicyOnRemoteComputer {
+    param(
+        [parameter(mandatory,ValueFromPipelineByPropertyName)]$Computername
+    )
+    Get-WmiObject -Namespace root\cimv2\power -Class Win32_PowerPlan -ComputerName $Computername | select ElementName,IsActive
+}
