@@ -267,6 +267,41 @@ Windows-Internal-Database
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
+    Name = "VendorVPN"
+    WindowsFeature = @"
+CMAK
+DirectAccess-VPN
+GPMC
+Routing
+RSAT-RemoteAccess
+RSAT-RemoteAccess-Mgmt
+RSAT-RemoteAccess-PowerShell
+SNMP-Service
+Telnet-Client
+Web-Application-Proxy
+Web-Static-Content
+Web-Basic-Auth
+Web-Default-Doc
+Web-Dir-Browsing
+Web-Filtering
+Web-Http-Errors
+Web-Http-Logging
+Web-Http-Redirect
+Web-Http-Tracing
+Web-ISAPI-Ext
+Web-ISAPI-Filter
+Web-Log-Libraries
+Web-Metabase
+Web-Mgmt-Service
+Web-Mgmt-Console
+Web-Request-Monitor
+Web-Scripting-Tools
+Web-Stat-Compression
+Web-Static-Content
+Windows-Internal-Database
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
     Name = "OracleDBA Remote Desktop"
     WindowsFeature = @"
 NET-Framework-Features
