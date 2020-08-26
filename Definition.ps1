@@ -1,4 +1,4 @@
-﻿$WindowsFeatureGroups = [PSCustomObject][Ordered] @{
+$WindowsFeatureGroups = [PSCustomObject][Ordered] @{
     Name = "BartenderCommander"
     WindowsFeature = @"
 NET-Framework-Features
@@ -301,7 +301,7 @@ Routing
 "@ -split "`r`n" 
 },
 [PSCustomObject][Ordered] @{
-    Name = "SCCM2016"
+    Name = "SCCM2019"
     WindowsFeature = @"
 BITS
 NET-Framework-45-Core
