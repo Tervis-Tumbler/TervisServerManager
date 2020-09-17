@@ -127,3 +127,8 @@ function Get-PerformancePowerPolicyOnRemoteComputer {
     )
     Get-WmiObject -Namespace root\cimv2\power -Class Win32_PowerPlan -ComputerName $Computername | select ElementName,IsActive
 }
+
+function Invoke-SCOM2019Provision {
+    Invoke-ApplicationProvision -ApplicationName "SCOM2019" -EnvironmentName Infrastructure
+#    $Nodes = Get-TervisApplicationNode -ApplicationName "SCOM2019" -EnvironmentName Infrastructure
+}
