@@ -1,4 +1,4 @@
-$WindowsFeatureGroups = [PSCustomObject][Ordered] @{
+﻿$WindowsFeatureGroups = [PSCustomObject][Ordered] @{
     Name = "BartenderCommander"
     WindowsFeature = @"
 NET-Framework-Features
@@ -119,7 +119,6 @@ Multipath-IO
     Name = "StandaloneHyperVServer"
     WindowsFeature = @"
 Hyper-V
-Hyper-V-Tools
 Hyper-V-PowerShell
 Multipath-IO
 "@ -split "`r`n" 
@@ -545,5 +544,94 @@ SNMP-Service
 SNMP-WMI-Provider
 Telnet-Client
 Windows-Server-Backup
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "FedExShipManagerServer"
+    WindowsFeature = @"
+SNMP-Service
+SNMP-WMI-Provider
+NET-Framework-Features
+NET-Framework-Core
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "HyperVCluster7"
+    WindowsFeature = @"
+Hyper-V
+Hyper-V-Tools
+Hyper-V-PowerShell
+Failover-Clustering
+Multipath-IO
+RSAT-Clustering-Mgmt
+RSAT-Clustering-PowerShell
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "RiminiSupport"
+    WindowsFeature = @"
+RDS-RD-Server
+SNMP-Service
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "OracleDR"
+    WindowsFeature = @"
+NET-Framework-Features
+NET-Framework-Core
+SNMP-Service
+SNMP-WMI-Provider
+FS-Fileserver
+FS-Data-Deduplication
+FS-DFS-Namespace
+FS-DFS-Replication
+FS-NFS-Service
+RSAT-File-Services
+Multipath-IO
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "AcronisFileServer"
+    WindowsFeature = @"
+NET-Framework-Features
+NET-Framework-Core
+SNMP-Service
+SNMP-WMI-Provider
+FS-Fileserver
+FS-Data-Deduplication
+FS-DFS-Namespace
+FS-DFS-Replication
+FS-NFS-Service
+RSAT-File-Services
+Multipath-IO
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "SCOM2019"
+    WindowsFeature = @"
+BITS
+NET-Framework-45-Core
+NET-Framework-45-ASPNET
+Telnet-Client
+UpdateServices-RSAT
+Web-Static-Content
+Web-Default-Doc
+Web-Dir-Browsing
+Web-Http-Errors
+Web-Http-Logging
+Web-Request-Monitor
+Web-Filtering
+Web-Stat-Compression
+Web-Metabase
+Web-Asp-Net
+Web-Asp-Net45
+Web-Windows-Auth
+Web-WMI
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "ChannelAdvisor"
+    WindowsFeature = @"
+SNMP-Service
 "@ -split "`r`n" 
 }
