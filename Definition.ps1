@@ -739,4 +739,24 @@ Web-WMI
     WindowsFeature = @"
 SNMP-Service
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "SCVMM2019"
+    WindowsFeature = @"
+SNMP-Service
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "SCDPM2019"
+    WindowsFeature = @"
+NET-Framework-Features
+NET-Framework-Core
+NET-Framework-45-Core
+NET-Framework-45-ASPNET
+SNMP-Service
+SNMP-WMI-Provider
+FS-Data-Deduplication
+Multipath-IO
+Hyper-V-PowerShell
+"@ -split "`r`n" 
 }
