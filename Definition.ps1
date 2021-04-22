@@ -759,4 +759,10 @@ FS-Data-Deduplication
 Multipath-IO
 Hyper-V-PowerShell
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "Adaptive"
+    WindowsFeature = @"
+SNMP-Service
+"@ -split "`r`n" 
 }
