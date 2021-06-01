@@ -765,4 +765,11 @@ Hyper-V-PowerShell
     WindowsFeature = @"
 SNMP-Service
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "NavisionRemoteApp"
+    WindowsFeature = @"
+RDS-RD-Server
+SNMP-Service
+"@ -split "`r`n" 
 }
