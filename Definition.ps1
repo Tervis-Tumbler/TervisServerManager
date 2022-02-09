@@ -772,4 +772,26 @@ SNMP-Service
 RDS-RD-Server
 SNMP-Service
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "2019FileServer"
+    WindowsFeature = @"
+NET-Framework-Features
+NET-Framework-Core
+SNMP-Service
+SNMP-WMI-Provider
+FS-Fileserver
+FS-Data-Deduplication
+FS-DFS-Namespace
+FS-DFS-Replication
+FS-NFS-Service
+RSAT-File-Services
+Multipath-IO
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "OpenDNSConnector"
+    WindowsFeature = @"
+SNMP-Service
+"@ -split "`r`n" 
 }
