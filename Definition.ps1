@@ -794,4 +794,10 @@ Multipath-IO
     WindowsFeature = @"
 SNMP-Service
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "Packsize"
+    WindowsFeature = @"
+SNMP-Service
+"@ -split "`r`n" 
 }
