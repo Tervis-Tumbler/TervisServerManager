@@ -800,4 +800,10 @@ SNMP-Service
     WindowsFeature = @"
 SNMP-Service
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "Solidworks"
+    WindowsFeature = @"
+SNMP-Service
+"@ -split "`r`n" 
 }
