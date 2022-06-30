@@ -806,4 +806,26 @@ SNMP-Service
     WindowsFeature = @"
 SNMP-Service
 "@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "VeeamBackup"
+    WindowsFeature = @"
+    SNMP-Service
+    SNMP-WMI-Provider
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "VeeamProxy"
+    WindowsFeature = @"
+    SNMP-Service
+    SNMP-WMI-Provider
+"@ -split "`r`n" 
+},
+[PSCustomObject][Ordered] @{
+    Name = "VeeamRepository"
+    WindowsFeature = @"
+    SNMP-Service
+    SNMP-WMI-Provider
+    Multipath-IO
+"@ -split "`r`n" 
 }
